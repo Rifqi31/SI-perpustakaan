@@ -1,0 +1,86 @@
+{% extends "base-karyawan.html" %}
+
+{% load staticfiles %}
+
+{% block content %}
+<div class="col-md-8">
+    <div class="card">
+        <div class="header">
+            <h4 class="title">Profil Karyawan</h4>
+        </div>
+        <div class="content table-responsive table-full-width">
+            <table class="table table-hover table-striped">
+				<tbody>
+					<tr>
+						<td>Nama</td>
+						<td style="width: 10px;">:</td>
+						<td>{{ karyawan.nama_karyawan }}</td>
+					</tr>
+					<tr>
+						<td>Jenis Kelamin</td>
+						<td style="width: 10px;">:</td>
+						<td>{{ karyawan.jenis_kelamin }}</td>
+					</tr>
+					<tr>
+						<td>Tanggal Lahir</td>
+						<td style="width: 10px;">:</td>
+						<td>{{ karyawan.tgl_lahir }}</td>
+					</tr>
+					<tr>
+						<td>Alamat</td>
+						<td style="width: 10px;">:</td>
+						<td>{{ karyawan.alamat }}</td>
+					</tr>
+					<tr>
+						<td>Telepon</td>
+						<td style="width: 10px;">:</td>
+						<td>{{ karyawan.no_telepon }}</td>
+					</tr>
+					<tr>
+						<td>Email</td>
+						<td style="width: 10px;">:</td>
+						<td>{{ karyawan.email }}</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>
+
+
+<div class="col-md-4">
+	<div class="card card-user" style="width:250px;">
+		<div class="content">
+				<div id="foto-karyawan">	
+					<img  src="/media/{{ karyawan.foto }}" style="width:200px; padding:20px;">
+				</div>
+		</div>
+			<button id="ganti-foto-button" class="btn btn-primary btn-xm btn-block" data-toggle="modal" data-target="#gantiFotoModal"><i class="fa fa-photo"></i>Ganti</button>
+	</div>
+</div>
+
+
+
+	<div class="modal fade" id="gantiFotoModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<form action="/ganti_foto/" method="POST" enctype="multipart/form-data">
+
+			{% csrf_token %}
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+							<h4 class="modal-title" id="myModalLabel">Ganti Foto</h4>
+					</div>
+						<div class="modal-body">
+							<p>Pilih foto yang anda sukai</p>
+								<input type="file" name="files">
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-default" data-dismiss="modal">Batal</button>
+								<input type="submit" class="btn btn-primary" value="Upload" />
+						</div>
+				</div>	
+			</form>
+		</div>
+	</div>
+{% endblock %}

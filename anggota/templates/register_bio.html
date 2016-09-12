@@ -1,0 +1,49 @@
+{% extends "base-login.html" %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+	<nav class="navbar navbar-default">
+	  <div class="container">
+	  <!--better for mobile device -->
+		<div class="navbar-header">
+		  <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navigation-example-2">
+			<span class="sr-only">Toggle navigation</span>
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+		  </button>
+		  <a class="navbar-brand" href="/">SI Perpustakaan</a>
+		</div>
+
+		  <div class="collapse navbar-collapse" id="navigation-example-2">
+			<ul class="nav navbar-nav navbar-right">
+				<li><a href="/login_karyawan/">login</a></li>
+			</ul>
+		  </div>
+	  </div>
+	</nav>
+
+
+	<div class="container" style="padding:100px;">
+		<div class="row">
+			<div class="col-md-10 col-md-offset-1">
+				<div class="panel-login panel panel-default">
+					<div class="panel-heading">
+						<h3 class="panel-title text-center" >Register biodata</h3>
+					</div>
+				<div class="panel-body">
+					<form action="/register_bio/" method="POST">
+						<div class="col-md-8 col-md-offset-2">
+							{% csrf_token %}
+							{{ form | crispy }}
+							<input class="btn btn-lg btn-default btn-block" type="submit" value="Submit" />
+						</div>
+					</form>
+				</div>
+				</div>
+			</div>
+		</div>
+	</div>
+{% endblock %}

@@ -1,0 +1,230 @@
+{% extends "base-karyawan.html" %}
+
+{% load buku_helper %}
+
+{% block buku %}
+
+<div class="col-md-6">
+	<div class="card">
+     	<div class="header">
+             <h4 class="title">Daftar Buku</h4>                   
+        </div>
+        <div class="content table-responsive table-full-width">
+         		<a href="/daftar_buku/"><button class="btn btn-primary">Cek Tabel</button></a>
+			<br />
+		<div class="table-responsive">
+            <table class="table table-hover">
+				<thead>
+					<tr>
+						<th>#</th>
+						<td>Judul Buku</td>
+						<td>Jenis Buku</td>
+						<td>Penulis</td>
+					</tr>
+				</thead>
+					<tbody>
+						{% if daftar_buku %}
+							{% for buku in daftar_buku %}
+								<tr>
+									<td>{{ forloop.counter }}</td>
+									<td>{{ buku.judul_buku }}</td>
+									<td>{{ buku.jenis_buku }}</td>
+									<td>{{ buku.penulis }}</td>
+								</tr>
+							{% endfor %}
+						{% else %}
+								<tr>
+									<td colspan="3" style="text-align:center;">Tidak ada data buku ..</td>
+								</tr>
+						{% endif %}
+					</tbody>
+			</table>
+		</div>
+			<ul class="pager">
+				{% if daftar_buku.has_previous %}
+					<li class="previous">
+						<a href="?page={{daftar_buku.previous_page_number}}">previous</a>
+					</li>
+				{% endif %}
+					<li class="current">
+						Page{{ daftar_buku.number }} of {{ daftar_buku.paginator.num_pages }}.
+					</li>
+				{% if daftar_buku.has_next %}
+					<li class="next">
+						<a href="?page={{daftar_buku.page_number}}">next</a>
+					</li>
+				{% endif %}
+			</ul>
+		</div>
+	</div>
+</div>
+{% endblock %}
+
+{% block peminjam %}
+<div class="col-md-6">
+	<div class="card">
+     	<div class="header">
+             <h4 class="title">Daftar Peminjam Buku</h4>                   
+        </div>
+        <div class="content table-responsive table-full-width">
+			<br />
+		<div class="table-responsive">
+            <table class="table table-hover">
+				<thead>
+					<tr>
+						<th>#</th>
+						<td>Nama</td>
+						<td>Judul Buku</td>
+						<td>Tgl dipinjam</td>
+						<td>Tgl dikembalikan</td>
+						<td>Status</td>
+					</tr>
+				</thead>
+					<tbody>
+						{% if daftar_pinjam %}
+							{% for pinjam in daftar_pinjam %}
+								<tr>
+									<td>{{ forloop.counter }}</td>
+									<td>{{ pinjam.nama_peminjam }}</td>
+									<td>{{ pinjam.judul_buku }}</td>
+									<td>{{ pinjam.tgl_buku_dipinjam }}</td>
+									<td>{{ pinjam.tgl_buku_dikembalikan }}</td>
+									<td>
+										{% if pinjam.dipinjam %}
+												<span class="lable label-success">pinjam</span>
+											{% else %}
+												<span class="label label-danger">Belum</span>
+										{% endif %}
+									</td>
+								</tr>
+							{% endfor %}
+						{% else %}
+								<tr>
+									<td colspan="3" style="text-align:center;">Tidak ada data peminjam ..</td>
+								</tr>
+						{% endif %}
+					</tbody>
+			</table>
+		</div>
+			<ul class="pager">
+				{% if daftar_buku.has_previous %}
+					<li class="previous">
+						<a href="?page={{daftar_pinjam.previous_page_number}}">previous</a>
+					</li>
+				{% endif %}
+					<li class="current">
+						Page{{ daftar_pinjam.number }} of {{ daftar_pinjam.paginator.num_pages }}.
+					</li>
+				{% if daftar_pinjam.has_next %}
+					<li class="next">
+						<a href="?page={{daftar_pinjam.page_number}}">next</a>
+					</li>
+				{% endif %}
+			</ul>
+		</div>
+	</div>
+</div>
+{% endblock %}
+
+{% block suplier %}
+<div class="col-md-6">
+	<div class="card">
+     	<div class="header">
+             <h4 class="title">Daftar suplier</h4>                    
+        </div>
+        <div class="content table-responsive table-full-width">
+        		<a href="/daftar_suplier/"><button class="btn btn-primary">Cek Tabel</button></a>
+			<br />
+		<div class="table-responsive">
+            <table class="table table-hover">
+				<thead>
+					<tr>
+						<th>#</th>
+						<td>Nama</td>
+						<td>Alamat</td>
+					</tr>
+				</thead>
+					<tbody>
+						{% if daftar_suplier %}
+							{% for suplier in daftar_suplier %}
+								<tr>
+									<td>{{ forloop.counter }}</td>
+									<td>{{ suplier.nama_suplier }}</td>
+									<td>{{ suplier.alamat_suplier }}</td>
+								</tr>
+							{% endfor %}
+						{% endif %}
+					</tbody>
+			</table>
+		</div>
+			<ul class="pager">
+				{% if daftar_suplier.has_previous %}
+					<li class="previous">
+						<a href="?page={{daftar_suplier.previous_page_number}}">previous</a>
+					</li>
+				{% endif %}
+					<li class="current">
+						Page{{ daftar_suplier.number }} of {{ daftar_suplier.paginator.num_pages }}.
+					</li>
+				{% if daftar_suplier.has_next %}
+					<li class="next">
+						<a href="?page={{daftar_suplier.page_number}}">next</a>
+					</li>
+				{% endif %}
+			</ul>
+		</div>
+	</div>
+</div>
+{% endblock %}
+
+{% block penyumbang %}
+
+<div class="col-md-6">
+	<div class="card">
+     	<div class="header">
+             <h4 class="title">Daftar Penyumbang</h4>                    
+        </div>
+        <div class="content table-responsive table-full-width">
+        		<a href="/daftar_penyumbang/"><button class="btn btn-primary">Cek Tabel</button></a>
+			<br />
+		<div class="table-responsive">
+            <table class="table table-hover">
+				<thead>
+					<tr>
+						<th>#</th>
+						<td>Nama</td>
+						<td>Alamat</td>
+					</tr>
+				</thead>
+					<tbody>
+						{% if daftar_penyumbang %}
+							{% for penyumbang in daftar_penyumbang %}
+								<tr>
+									<td>{{ forloop.counter }}</td>
+									<td>{{ penyumbang.nama_penyumbang }}</td>
+									<td>{{ penyumbang.alamat_penyumbang }}</td>
+								</tr>
+							{% endfor %}
+						{% endif %}
+					</tbody>
+			</table>
+		</div>
+			<ul class="pager">
+				{% if daftar_penyumbang.has_previous %}
+					<li class="previous">
+						<a href="?page={{daftar_penyumbang.previous_page_number}}">previous</a>
+					</li>
+				{% endif %}
+					<li class="current">
+						Page{{ daftar_penyumbang.number }} of {{ daftar_penyumbang.paginator.num_pages }}.
+					</li>
+				{% if daftar_penyumbang.has_next %}
+					<li class="next">
+						<a href="?page={{daftar_penyumbang.page_number}}">next</a>
+					</li>
+				{% endif %}
+			</ul>
+		</div>
+	</div>
+</div>
+{% endblock %}

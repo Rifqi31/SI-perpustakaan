@@ -1,0 +1,69 @@
+{% extends "base.html" %}
+
+{% load anggota_helper %}
+
+{% block content %}
+
+<div class="col-md-12">
+	<div class="card card-plain">
+     	<div class="header">
+             <h4 class="title">Daftar Buku</h4>                    
+        </div>
+        <div class="content table-responsive table-full-width">
+				<br />
+		<div class="table-responsive">
+            <table class="table table-hover">
+				<thead>
+					<tr>
+						<th>#</th>
+						<td>Judul Buku</td>
+						<td>Tgl dipinjam</td>
+						<td>Tgl dikembalikan</td>
+						<td>Status</td>
+					</tr>
+				</thead>
+					<tbody>
+						{% if daftar_buku_dipinjam %}
+							{% for pinjam in daftar_buku_dipinjam %}
+								<tr>
+									<td>{{ forloop.counter }}</td>
+									<td>{{ pinjam.judul_buku }}</td>
+									<td>{{ pinjam.tgl_buku_dipinjam }}</td>
+									<td>{{ pinjam.tgl_buku_dikembalikan }}</td>
+									<td>
+										{% if pinjam.dipinjam %}
+												<span class="lable label-success">boleh pinjam</span>
+											{% else %}
+												<span class="label label-danger">Belum</span>
+										{% endif %}
+									</td>
+								</tr>
+							{% endfor %}
+						{% else %}
+								<tr>
+									<td colspan="3" style="text-align:center;">Tidak ada data buku ..</td>
+								</tr>
+						{% endif %}
+					</tbody>
+			</table>
+		</div>
+			<ul class="pager">
+				{% if daftar_buku_pinjam.has_previous %}
+					<li class="previous">
+						<a href="?page={{daftar_buku_pinjam.previous_page_number}}">previous</a>
+					</li>
+				{% endif %}
+					<li class="current">
+						Page{{ daftar_buku_pinjam.number }} of {{ daftar_buku_pinjam.paginator.num_pages }}.
+					</li>
+				{% if daftar_buku_pinjam.has_next %}
+					<li class="next">
+						<a href="?page={{daftar_buku_pinjam.page_number}}">next</a>
+					</li>
+				{% endif %}
+			</ul>
+	</div>
+		</div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    {% include "head.html" %}
+
+</head>
+
+<body>
+
+    
+    <div id="container">
+
+        {% block content %}
+        {% endblock %}
+
+    </div>
+    <!-- /#wrapper -->
+
+    {% include "js.html" %}
+
+    {% block inline_js %}
+    <script type="text/javascript">
+    	$window.load(function(){
+    		$('#foto-karyawan').mouseover(function(){
+    			$('#ganti-foto-button').css('display'.'block');
+    		
+    		}).mouseover(function(){
+    			$('#ganti-foto-button').fadeOut();
+    		});
+    	});
+    </script>
+    {% endblock %}
+</body>
+
+</html>

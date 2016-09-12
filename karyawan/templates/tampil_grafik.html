@@ -1,0 +1,38 @@
+{% extends 'daftar_hadir.html' %}
+
+{% block content %}
+	<div class="row">
+		<div class="col-lg-12">
+			<h1 class="page-header">Grafik Kehadiran</h1>
+				<ol class="breadcrumb" style="margin-bottom: 5px;">
+					<li><a href="/">Beranda</a></li>
+					<li><a href="/daftar_hadir">Daftar Hadir</a></li>
+					<li class="active">Grafik {{ bulan }}/{{ tahun }}</li>
+				</ol>
+				<br />
+		</div>
+		<!-- ./col-lg-12 -->
+	</div>
+	<!-- ./row -->
+	<div class="row">
+	<div class="row">
+		<div class="col-lg-12">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					Grafik Kehadiran Anda di bulan {{ bulan }} tahun {{ tahun }}
+				</div>
+			<!-- ./panel-heading -->
+			<div class="panel-body">
+				<div id="morris-bar-chart"></div>
+				<div id="chart_data" style="display:none;">{{ chart_data }}</div>
+			</div>
+			<!-- ./panel-body -->
+			</div>
+			<!-- ./panel -->
+		</div>
+		<!-- ./col-lg-12 -->
+	</div>
+	<!-- ./row -->
+	</div>
+	<!-- ./row -->
+{% endblock %}

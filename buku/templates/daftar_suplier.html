@@ -1,0 +1,65 @@
+{% extends "base-karyawan.html" %}
+
+{% load buku_helper %}
+
+{% block content %}
+
+<div class="col-md-12">
+	<div class="card card-plain">
+     	<div class="header">
+             <h4 class="title">Daftar Suplier</h4>                    
+        </div>
+        <div class="content table-responsive table-full-width">
+		<br />
+		<div class="table-responsive">
+            <table class="table table-hover">
+				<thead>
+					<tr>
+						<th>#</th>
+						<td>Nama</td>
+						<td>Alamat</td>
+						<td>Judul Buku</td>
+						<td>tgl terima</td>
+						<td>Jumlah Buku</td>
+					</tr>
+				</thead>
+					<tbody>
+						{% if daftar_suplier %}
+							{% for suplier in daftar_suplier %}
+								<tr>
+									<td>{{ forloop.counter }}</td>
+									<td>{{ suplier.nama_penyumbang }}</td>
+									<td>{{ suplier.alamat_penyumbang }}</td>
+									<td>{{ suplier.judul_buku }}</td>
+									<td>{{ suplier.tgl_terima }}</td>
+									<td>{{ suplier.jumlah_buku }}</td>
+								</tr>
+							{% endfor %}
+						{% else %}
+								<tr>
+									<td colspan="3" style="text-align:center;">Tidak ada data buku ..</td>
+								</tr>
+						{% endif %}
+					</tbody>
+			</table>
+		</div>
+			<ul class="pager">
+				{% if daftar_suplier.has_previous %}
+					<li class="previous">
+						<a href="?page={{daftar_suplier.previous_page_number}}">previous</a>
+					</li>
+				{% endif %}
+					<li class="current">
+						Page{{ daftar_suplier.number }} of {{ daftar_suplier.paginator.num_pages }}.
+					</li>
+				{% if daftar_suplier.has_next %}
+					<li class="next">
+						<a href="?page={{daftar_suplier.page_number}}">next</a>
+					</li>
+				{% endif %}
+			</ul>
+	</div>
+		</div>
+</div>
+
+{% endblock %}

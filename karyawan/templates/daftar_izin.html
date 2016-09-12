@@ -1,0 +1,62 @@
+{% extends "base-karyawan.html" %}
+
+{% load kehadiran_helper %}
+
+{% block content %}
+<div class="col-md-12">
+    <div class="card">
+        <div class="header">
+            <h4 class="title">Daftar Izin</h4>
+        </div>
+        <div class="content table-responsive table-full-width">
+            <table class="table table-hover table-striped">
+				<thead>
+					<tr>
+						<th>#</th>
+							<td>Jenis Izin</td>
+							<td>Waktu Mulai</td>
+							<td>Waktu Berhenti</td>
+							<td>Alasan</td>
+							<td>Disetujui</td>
+					</tr>
+				</thead>
+					<tbody>
+						{% for izin in daftar_izin %}
+							<tr>
+								<td>{{ forloop.counter|get_table_number:daftar_izin.number }}</td>
+								<td>{{ izin.jenis_kehadiran }}</td>
+								<td>{{ izin.waktu_mulai }}</td>
+								<td>{{ izin.waktu_berhenti }}</td>
+								<td>{{ izin.alasan }}</td>
+								<td>
+									{% if izin.disetujui %}
+											<span class="lable label-success">Sudah</span>
+										{% else %}
+											<span class="label label-danger">Belum</span>
+									{% endif %}
+								</td>
+										</tr>
+									{% endfor %}
+					</tbody>
+			</table>
+		</div>
+							<!-- /.table-resposive -->
+			<ul class="pager">
+				{% if daftar_izin.has_previous %}
+					<li class="previous">
+						<a href="?page={{daftar_izin.previous_page_number}}">previous</a>
+					</li>
+				{% endif %}
+					<li class="current">
+						Page{{ daftar_izin.number }} of {{ daftar_izin.paginator.num_pages }}.
+					</li>
+				{% if daftar_izin.has_next %}
+					<li class="next">
+						<a href="?page={{daftar_izin.page_number}}">next</a>
+					</li>
+				{% endif %}
+			</ul>
+	</div>
+</div>
+{% endblock %}
+

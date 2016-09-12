@@ -1,0 +1,79 @@
+{% extends "base-karyawan.html" %}
+
+{% load buku_helper %}
+
+{% block content %}
+
+<div class="col-md-12">
+	<div class="card card-plain">
+     	<div class="header">
+             <h4 class="title">Daftar Buku</h4>                    
+        </div>
+        <div class="content table-responsive table-full-width">
+        	<form action="/daftar_buku/" method="POST" role="form" class="form-inline">
+				{% csrf_token %}
+					<div class="form-group">
+						<label>Jenis Buku</label>
+							<select id="jenis_buku" name="jenis_buku" class="form-control">
+								<option value="Novel">Novel</option>
+								<option value="Cerpen">Cerpen</option>
+								<option value="Majalah">Majalah</option>
+								<option value="Komik">Komik</option>
+								<option value="Manga">Manga</option>
+								<option value="Komputer">Komputer</option>
+								<option value="Sekolah">Sekolah</option>
+							</select>
+					</div>
+					<div class="form-group">
+						<input type="submit" class="btn btn-primary" value="submit" />
+					</div>
+			</form>
+				<br />
+		<div class="table-responsive">
+            <table class="table table-hover">
+				<thead>
+					<tr>
+						<th>#</th>
+						<td>Judul Buku</td>
+						<td>Jenis Buku</td>
+						<td>Penulis</td>
+					</tr>
+				</thead>
+					<tbody>
+						{% if daftar_buku %}
+							{% for buku in daftar_buku %}
+								<tr>
+									<td>{{ forloop.counter }}</td>
+									<td>{{ buku.judul_buku }}</td>
+									<td>{{ buku.jenis_buku }}</td>
+									<td>{{ buku.penulis }}</td>
+								</tr>
+							{% endfor %}
+						{% else %}
+								<tr>
+									<td colspan="3" style="text-align:center;">Tidak ada data buku ..</td>
+								</tr>
+						{% endif %}
+					</tbody>
+			</table>
+		</div>
+			<ul class="pager">
+				{% if daftar_buku.has_previous %}
+					<li class="previous">
+						<a href="?page={{daftar_buku.previous_page_number}}">previous</a>
+					</li>
+				{% endif %}
+					<li class="current">
+						Page{{ daftar_buku.number }} of {{ daftar_buku.paginator.num_pages }}.
+					</li>
+				{% if daftar_buku.has_next %}
+					<li class="next">
+						<a href="?page={{daftar_buku.page_number}}">next</a>
+					</li>
+				{% endif %}
+			</ul>
+	</div>
+		</div>
+</div>
+
+{% endblock %}

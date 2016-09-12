@@ -1,0 +1,162 @@
+{% load staticfiles %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    {% include "head.html" %}
+
+</head>
+
+<body>
+
+<div class="wrapper">
+    <div class="sidebar" data-color="orange" data-image="{% static 'img/stack-of-books.jpg' %}">
+
+
+<div class="sidebar-wrapper">
+            <div class="logo">
+                <a href="/profil_karyawan/" class="simple-text">
+                    SI Perpustakaan
+                </a>
+            </div>
+
+            <ul class="nav">
+                <li>
+                    <a href="#">
+                        <i class="pe-7s-home"></i>
+                        <p>Dashboard</p>
+                    </a>
+                </li>
+                <li>
+                    <a href="/profil_karyawan/">
+                        <i class="pe-7s-user"></i>
+                        <p>Profil</p>
+                    </a>
+                </li>
+                <li>
+                    <a href="/tampil_tabel/">
+                        <i class="pe-7s-notebook"></i>
+                        <p>Buku</p>
+                    </a>
+                </li>          
+                
+                <li>
+                    <a href="/daftar_hadir/">
+                        <i class="pe-7s-timer"></i>
+                        <p>Daftar hadir</p>
+                    </a>
+                </li>
+                <li>
+                    <a href="/daftar_izin/">
+                        <i class="pe-7s-paperclip"></i>
+                        <p>Daftar Izin</p>
+                    </a>
+                </li>
+                <li>
+                    <a href="/pengajuan_izin/">
+                        <i class="pe-7s-date"></i>
+                        <p>Pengajuan izin</p>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="main-panel">
+        <nav class="navbar navbar-default navbar-fixed">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                </div>
+                <div class="collapse navbar-collapse">
+                    <ul class="nav navbar-nav navbar-right">
+                        {% if request.user.is_authenticated %}
+                            <li><a href="">{{ request.session.username }}</a></li>
+                            <li><a href="/logout/">Logout</a></li>
+                        {% endif %}
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+
+        <div class="content">
+            <div class="container-fluid">
+                <div class="row">
+
+                    {% block content %}
+                    {% endblock %}
+
+                    {% block buku %}
+                    {% endblock %}
+
+                    {% block peminjam %}
+                    {% endblock %}
+                </div>
+                <div class="row">
+                    
+                    {% block suplier %}
+                    {% endblock %}
+                
+                    {% block penyumbang %}
+                    {% endblock %}
+                    
+                </div>
+            </div>
+        </div>
+
+
+        <footer class="footer">
+            <div class="container-fluid">
+                <nav class="pull-left">
+                    <ul>
+                        <li>
+                            <a href="/">
+                                Home
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                Blog
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+                <p class="copyright pull-right">
+                    &copy; 2016 <a href="http://www.creative-tim.com">Creative Tim</a>, made with love for a better web
+                </p>
+            </div>
+        </footer>
+
+    </div>
+</div>
+
+
+    {% include "js.html" %}
+    <script type="text/javascript">
+    $(function(){
+        var chart_data = JSON.parse($('#chart_data').html());
+
+
+    Morris.Bar({
+        element:'morris-bar-chart',
+        data:chart_data.data,
+        xkeys:'x',
+        ykeys:['a'],
+        labels:['Jumlah'],
+        hideHover:'auto',
+        resize:true
+    });
+
+    }); 
+    </script>
+</body>
+
+</html>

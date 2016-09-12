@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+<div class="col-md-8">
+    <div class="card">
+        <div class="header">
+            <h4 class="title">Pengajuan Peminjaman Buku</h4>
+        </div>
+        <div class="content">
+            <form action="/pinjam_buku/" method="POST">
+
+                <div class="row">
+                	<div class="col-md-8">
+                    {% csrf_token %}
+  					{{form|crispy}}
+  					</div>
+              	</div>
+                <button type="submit" class="btn btn-info btn-fill pull-right">Pinjam Buku</button>
+                    <div class="clearfix"></div>
+            </form>
+        </div>
+	</div>
+</div>
+{% endblock %}
