@@ -15,4 +15,4 @@ Spesifikasi :
 
 
 My Facebook :
-<p><a href="http://www.facebook.com/iChonez"</a>Rifqi Muttaqin</p>
+<p><a href="http://www.facebook.com/ichonez"</a>Rifqi Muttaqin</p>
