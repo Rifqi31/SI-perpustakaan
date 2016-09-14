@@ -4,7 +4,7 @@ from django.conf import settings
 from django.db import models
 from django.contrib.auth.models import User
 
-from anggota.models import transaksi_peminjaman
+from anggota.models import biodata
 from buku.models import data_buku
 
 # Create your models here.
@@ -32,14 +32,14 @@ class biodata_karyawan(models.Model):
 
 class data_transaksi_peminjaman(models.Model):
 
-	nama_peminjam = models.ForeignKey(transaksi_peminjaman)
-	judul_buku = models.ForeignKey(data_buku)
+	nama_peminjam = models.ForeignKey(biodata)
+	judul_buku = models.CharField(max_length = 100)
 	tgl_buku_dipinjam = models.DateField(null = True)
 	tgl_buku_dikembalikan = models.DateField(null = True)
-	dipinjam = models.BooleanField(default = False)
+	status = models.BooleanField(default = False)
 
 	def __unicode__(self):
-		return self.judul_buku.judul_buku
+		return self.nama_peminjam.nama
 
 
 class Akun_karyawan(models.Model):

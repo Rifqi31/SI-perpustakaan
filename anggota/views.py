@@ -7,7 +7,8 @@ from django.contrib.auth.models import User
 #Paginator
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
-from anggota.models import biodata
+from buku.models import *
+from anggota.models import biodata, transaksi_peminjaman
 from anggota.forms import anggota_form, akun_form, peminjaman_form
 from karyawan.models import data_transaksi_peminjaman
 #from anggota.models import akun_anggota_form
@@ -37,9 +38,9 @@ def peminjaman_buku(request):
 		form = peminjaman_form(form_data)
 
 		if form.is_valid():
-			pinjam = pinjam_buku(
+			pinjam = transaksi_peminjaman(
 
-				anggota = biodata.objects.get(id = request.session['anggota_id']),
+				nama_peminjam = biodata.objects.get(id = request.session['anggota_id']),
 				judul_buku = request.POST['judul_buku'],
 
 				)
@@ -55,12 +56,13 @@ def peminjaman_buku(request):
 @login_required(login_url = settings.LOGIN_URL)
 def tampil_buku_dipinjam(request):
 
-	daftar_buku_dipinjam = data_transaksi_peminjaman.objects.filter(id = request.session['anggota_id'])
+	#daftar buku yang dipinjam
+
+	daftar_buku_dipinjam = data_transaksi_peminjaman.objects.filter(nama_peminjam__id = request.session['anggota_id'])
 
 	#pagination
 	paginator = Paginator(daftar_buku_dipinjam, 5)
 	page = request.GET.get('page')
-
 	try:
 		daftar_buku_dipinjam = paginator.page(page)
 	except PageNotAnInteger:
@@ -68,7 +70,23 @@ def tampil_buku_dipinjam(request):
 	except EmptyPage:
 		daftar_buku_dipinjam = paginator.page(paginator.num_pages)
 
-	return render(request,'daftar_buku_dipinjam.html',{'daftar_buku_dipinjam':daftar_buku_dipinjam})
+
+	#daftar history buku
+
+	history_buku_pinjam= transaksi_peminjaman.objects.filter(nama_peminjam__id = request.session['anggota_id'])
+
+	#pagination
+	paginator = Paginator(history_buku_pinjam, 5)
+	page = request.GET.get('page')
+	try:
+		history_buku_pinjam = paginator.page(page)
+	except PageNotAnInteger:
+		history_buku_pinjam = paginator.page(1)
+	except EmptyPage:
+		history_buku_pinjam = paginator.page(paginator.num_pages)
+
+	return render(request,'daftar_buku_dipinjam.html',{'daftar_buku_dipinjam':daftar_buku_dipinjam,'history_buku_pinjam':history_buku_pinjam})
+
 
 
 def register_bio_view(request):

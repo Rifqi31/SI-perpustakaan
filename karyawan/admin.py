@@ -16,7 +16,7 @@ admin.site.register(biodata_karyawan, karyawan_Admin)
 
 
 class peminjaman_Admin(admin.ModelAdmin):
-	list_display = ['nama_peminjam','judul_buku','tgl_buku_dipinjam','tgl_buku_dikembalikan','dipinjam']
+	list_display = ['nama_peminjam','judul_buku','tgl_buku_dipinjam','tgl_buku_dikembalikan','status']
 	#list_filter = []
 	search_fields = ['nama_peminjam','judul_buku']
 	list_per_page = 15
@@ -30,7 +30,7 @@ class peminjaman_Admin(admin.ModelAdmin):
 			numdays = diff.days + 1
 			date_list = [base - datetime.timedelta(days = x)for x in range(0, numdays)]
 
-			pinjam.dipinjam = True
+			pinjam.status = True
 			pinjam.save()
 
 
@@ -38,9 +38,10 @@ class peminjaman_Admin(admin.ModelAdmin):
 
 
 	def tidak_dipinjam(self, request, queryset):
-		queryset.update(dipinjam = False)
+		queryset.update(status = False)
 
 	tidak_dipinjam.short_description = "Batalkan peminjaman yang dipilih"
+
 
 admin.site.register(data_transaksi_peminjaman, peminjaman_Admin)
 

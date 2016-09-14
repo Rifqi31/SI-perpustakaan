@@ -90,10 +90,10 @@
 									<td>{{ pinjam.tgl_buku_dipinjam }}</td>
 									<td>{{ pinjam.tgl_buku_dikembalikan }}</td>
 									<td>
-										{% if pinjam.dipinjam %}
-												<span class="lable label-success">pinjam</span>
+										{% if pinjam.status %}
+												<span class="lable label-success">Sedang dipinjam</span>
 											{% else %}
-												<span class="label label-danger">Belum</span>
+												<span class="lable label-danger">Belum dipinjam</span>
 										{% endif %}
 									</td>
 								</tr>
@@ -107,7 +107,7 @@
 			</table>
 		</div>
 			<ul class="pager">
-				{% if daftar_buku.has_previous %}
+				{% if daftar_pinjam.has_previous %}
 					<li class="previous">
 						<a href="?page={{daftar_pinjam.previous_page_number}}">previous</a>
 					</li>

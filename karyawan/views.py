@@ -9,6 +9,7 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 #models and forms
 from karyawan.models import biodata_karyawan, Kehadiran_karyawan, Izin_karyawan, Akun_karyawan
+from karyawan.forms import *
 
  
 # Create your views here.
@@ -107,6 +108,7 @@ def profil_karyawan(request):
 
 	return render(request, 'profil_karyawan.html',{'karyawan':karyawan})
 
+
 @login_required(login_url=settings.LOGIN_KARYAWAN_URL)
 def ganti_foto(request):
 	karyawan = biodata_karyawan.objects.get(id=request.session['karyawan_id'])
@@ -116,6 +118,8 @@ def ganti_foto(request):
 	return redirect('/profil_karyawan/')
 
 
+
+#bahan pr belum selesai
 @login_required(login_url = settings.LOGIN_KARYAWAN_URL)
 def tampil_grafik(request, bulan, tahun):
 	temp_char_data = []

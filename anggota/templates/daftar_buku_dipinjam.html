@@ -4,7 +4,7 @@
 
 {% block content %}
 
-<div class="col-md-12">
+<div class="col-md-6">
 	<div class="card card-plain">
      	<div class="header">
              <h4 class="title">Daftar Buku</h4>                    
@@ -31,7 +31,7 @@
 									<td>{{ pinjam.tgl_buku_dipinjam }}</td>
 									<td>{{ pinjam.tgl_buku_dikembalikan }}</td>
 									<td>
-										{% if pinjam.dipinjam %}
+										{% if pinjam.status %}
 												<span class="lable label-success">boleh pinjam</span>
 											{% else %}
 												<span class="label label-danger">Belum</span>
@@ -48,17 +48,17 @@
 			</table>
 		</div>
 			<ul class="pager">
-				{% if daftar_buku_pinjam.has_previous %}
+				{% if daftar_buku_dipinjam.has_previous %}
 					<li class="previous">
-						<a href="?page={{daftar_buku_pinjam.previous_page_number}}">previous</a>
+						<a href="?page={{daftar_buku_dipinjam.previous_page_number}}">previous</a>
 					</li>
 				{% endif %}
 					<li class="current">
-						Page{{ daftar_buku_pinjam.number }} of {{ daftar_buku_pinjam.paginator.num_pages }}.
+						Page{{ daftar_buku_dipinjam.number }} of {{ daftar_buku_dipinjam.paginator.num_pages }}.
 					</li>
-				{% if daftar_buku_pinjam.has_next %}
+				{% if daftar_buku_dipinjam.has_next %}
 					<li class="next">
-						<a href="?page={{daftar_buku_pinjam.page_number}}">next</a>
+						<a href="?page={{daftar_buku_dipinjam.page_number}}">next</a>
 					</li>
 				{% endif %}
 			</ul>
@@ -66,4 +66,53 @@
 		</div>
 </div>
 
+<div class="col-md-6">
+	<div class="card">
+     	<div class="header">
+             <h4 class="title">History Buku</h4>                    
+        </div>
+        <div class="content table-responsive table-full-width">
+				<br />
+		<div class="table-responsive">
+            <table class="table table-hover">
+				<thead>
+					<tr>
+						<th>#</th>
+						<td>Judul Buku</td>
+					</tr>
+				</thead>
+					<tbody>
+						{% if history_buku_pinjam %}
+							{% for history in history_buku_pinjam %}
+								<tr>
+									<td>{{ forloop.counter }}</td>
+									<td>{{ history.judul_buku }}</td>
+								</tr>
+							{% endfor %}
+						{% else %}
+								<tr>
+									<td colspan="3" style="text-align:center;">Tidak ada data buku ..</td>
+								</tr>
+						{% endif %}
+					</tbody>
+			</table>
+		</div>
+			<ul class="pager">
+				{% if history_buku_pinjam.has_previous %}
+					<li class="previous">
+						<a href="?page={{history_buku_pinjam.previous_page_number}}">previous</a>
+					</li>
+				{% endif %}
+					<li class="current">
+						Page{{ history_buku_pinjam.number }} of {{ history_buku_pinjam.paginator.num_pages }}.
+					</li>
+				{% if history_buku_pinjam.has_next %}
+					<li class="next">
+						<a href="?page={{history_buku_pinjam.page_number}}">next</a>
+					</li>
+				{% endif %}
+			</ul>
+	</div>
+		</div>
+</div>
 {% endblock %}

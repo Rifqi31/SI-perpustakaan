@@ -9,15 +9,23 @@
     <script src="{% static 'js/morris.js' %}"></script>
     <script src="{% static 'js/morris.min.js' %}"></script>
 
-    <!--Bower CSS -->
-    <script src="{% static 'js/bower.json' %}"></script>
-    <script src="{% static 'js/bower.travis.json' %}"></script>
-
-    <!--Thir party CSS -->
-    <script src="{% static 'js/package.json' %}"></script>
-    <script src="{% static 'js/Gruntfile.js' %}"></script>
-
-
 
     <script src="{% static 'js/bootstrap-checkbox-radio-switch.js' %}"></script>
     <script src="{% static 'js/light-bootstrap-dashboard.js' %}"></script>
+
+    <script type="text/javascript">
+    $(document).ready(function(){
+        var chart_data = JSON.parse($('#chart_data').html());
+
+
+        Morris.Bar({
+            element:'morris-bar-chart',
+            data:chart_data.data,
+            xkeys:'x',
+            ykeys:['a'],
+            labels:['Jumlah'],
+            hideHover:'auto',
+            resize:true
+        });
+    });
+    </script>

@@ -53,16 +53,20 @@
                         </div>
                     </div>
 
-<div class="col-md-4">
-	<div class="card card-user" style="width:250px;">
-		<div class="content">
-				<div id="foto-anggota">	
-					<img  src="/media/{{ anggota.foto_anggota }}" style="width:200px; padding:20px;">
-				</div>
-		</div>
-			<button id="ganti-foto-button" class="btn btn-primary btn-xm btn-block" data-toggle="modal" data-target="#gantiFotoModal"><i class="fa fa-photo"></i>Ganti</button>
-	</div>
-</div>
+
+  <div class="col-md-4">
+        <div class="card card-user">
+            <div class="content image" id="foto-anggota">
+                    <img src="/media/{{ anggota.foto_anggota }}" class="img-circle" style="padding:20px;" />
+            </div>
+        <hr>
+        <div class="text-center">
+            <button id="ganti-foto-button" class="btn btn-primary btn-xm" data-toggle="modal" data-target="#gantiFotoModal"><i class="fa fa-photo"></i>Ganti</button>
+
+        </div>
+       	</div>
+  </div>
+
 
 	<div class="modal fade" id="gantiFotoModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 		<div class="modal-dialog">

@@ -140,23 +140,7 @@
 
 
     {% include "js.html" %}
-    <script type="text/javascript">
-    $(function(){
-        var chart_data = JSON.parse($('#chart_data').html());
 
-
-    Morris.Bar({
-        element:'morris-bar-chart',
-        data:chart_data.data,
-        xkeys:'x',
-        ykeys:['a'],
-        labels:['Jumlah'],
-        hideHover:'auto',
-        resize:true
-    });
-
-    }); 
-    </script>
 </body>
 
 </html>
