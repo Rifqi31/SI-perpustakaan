@@ -19,6 +19,8 @@ from django.contrib import admin
 from django.conf import settings
 from django.conf.urls.static import static
 
+#app as view
+
 from welcome_page import views as welcome_views
 from anggota import views as anggota_views
 from karyawan import views as karyawan_views
@@ -49,15 +51,20 @@ urlpatterns = [
     url(r'^daftar_izin/', karyawan_views.daftar_izin_karyawan),
     url(r'^pengajuan_izin/', karyawan_views.pengajuan_izin_karyawan),
     url(r'^ganti_foto/',karyawan_views.ganti_foto),
-    url(r'^daftar_hadir/(?P<bulan>\d+)/(?P<tahun>\d+)$',karyawan_views.tampil_grafik, name='show_grafik'),
+    url(r'^daftar_hadir/grafik/(?P<bulan>\d+)/(?P<tahun>\d+)/$',karyawan_views.tampil_grafik, name ='show_grafik'),
+    url(r'^daftar_hadir/cetak/(?P<bulan>\d+)/(?P<tahun>\d+)/$',karyawan_views.cetak_daftar_hadir, name ='show_pdf'),
+
+
+    #Dashboard-karyawan
+    url(r'^dashboard/',karyawan_views.dashboard),
 
     #buku
 
     url(r'^tampil_tabel/', buku_views.tampil_tabel,),   
-    url(r'^daftar_buku/', buku_views.daftar_peminjam, name='daftar_peminjam'),
-    url(r'^daftar_peminjam/', buku_views.daftar_buku, name='daftar_buku'),
-    url(r'^daftar_suplier/', buku_views.daftar_suplier_buku, name='suplier'),
-    url(r'^daftar_penyumbang/', buku_views.daftar_penyumbang_buku, name='penyumbang'),
+    url(r'^daftar_buku/', buku_views.daftar_peminjam, name ='daftar_peminjam'),
+    url(r'^daftar_peminjam/', buku_views.daftar_buku, name ='daftar_buku'),
+    url(r'^daftar_suplier/', buku_views.daftar_suplier_buku, name ='suplier'),
+    url(r'^daftar_penyumbang/', buku_views.daftar_penyumbang_buku, name ='penyumbang'),
 
 
     

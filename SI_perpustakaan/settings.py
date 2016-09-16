@@ -41,11 +41,12 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     #third party apps
     'crispy_forms',
+    'model_urls',
     #my apps
     'anggota',
     'buku',
     'karyawan',
-    'welcome_page'
+    'welcome_page',
 ]
 
 MIDDLEWARE_CLASSES = [
