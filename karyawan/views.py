@@ -12,6 +12,9 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 #Reportlab
 from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer, Table, TableStyle
 from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
+from reportlab.pdfgen import canvas
+from reportlab.lib.enums import TA_JUSTIFY
+from reportlab.lib.pagesizes import letter
 from reportlab.lib.units import inch
 from reportlab.lib.pagesizes import A4, landscape
 from reportlab.lib import colors
@@ -20,7 +23,7 @@ from reportlab.lib import colors
 from karyawan.models import biodata_karyawan, Kehadiran_karyawan, Izin_karyawan, Akun_karyawan
 from karyawan.forms import *
 
-import json 
+import json, time
 
 # Create your views here.
 
@@ -60,12 +63,15 @@ def logout_karyawan_view(request):
 def daftar_hadir_karyawan(request):
 	daftar_hadir = None
 
+	bulan = 0
+	tahun = 0
+
 	if request.method == 'POST':
 		bulan = request.POST['bulan']
 		tahun = request.POST['tahun']
 		daftar_hadir = Kehadiran_karyawan.objects.filter(waktu__year = tahun, waktu__month = bulan, karyawan__id = request.session['karyawan_id'])
 
-	return render(request, 'daftar_hadir.html',{'daftar_hadir':daftar_hadir})
+	return render(request, 'daftar_hadir.html',{'daftar_hadir':daftar_hadir, 'bulan':bulan, 'tahun':tahun})
 
 
 @login_required(login_url = settings.LOGIN_KARYAWAN_URL)
@@ -129,26 +135,21 @@ def ganti_foto(request):
 
 
 
+
 @login_required(login_url = settings.LOGIN_KARYAWAN_URL)
-def tampil_grafik(request,bulan,tahun):
-	temp_char_data = []
+def tampil_grafik(request, bulan, tahun):
+	temp_chart_data = []
 
-	daftar_hadir = Kehadiran_karyawan.objects.filter(waktu__year=tahun,waktu__month=bulan,karyawan__id=request.session['karyawan_id'])
+	daftar_hadir = Kehadiran_karyawan.objects.filter(waktu__year=tahun, waktu__month=bulan, karyawan__id=request.session['karyawan_id'])
 
-	temp_char_data.append({"x":"hadir","a":daftar_hadir.filter(jenis_kehadiran='hadir').count()})
-	temp_char_data.append({"x":"izin","a":daftar_hadir.filter(jenis_kehadiran='izin').count()})
-	temp_char_data.append({"x":"alpa","a":daftar_hadir.filter(jenis_kehadiran='alpa').count()})
-	temp_char_data.append({"x":"cuti","a":daftar_hadir.filter(jenis_kehadiran='cuti').count()})
+	temp_chart_data.append({"x":"hadir","a":daftar_hadir.filter(jenis_kehadiran='hadir').count() })
+	temp_chart_data.append({"x":"izin","a":daftar_hadir.filter(jenis_kehadiran='izin').count() })
+	temp_chart_data.append({"x":"alpa","a":daftar_hadir.filter(jenis_kehadiran='alpa').count() })
+	temp_chart_data.append({"x":"cuti","a":daftar_hadir.filter(jenis_kehadiran='cuti').count() })
 
 	chart_data = json.dumps({"data":temp_chart_data})
-	print(chart_data)
-	context = {
-		'chart_data':chart_data,
-		'bulan':bulan,
-		'tahun':tahun
-	}
 
-	return render(request, 'tampil_grafik.html',context)
+	return render(request, 'tampil_grafik.html',{'chart_data':chart_data, 'bulan':bulan, 'tahun':tahun})
 
 
 
@@ -204,7 +205,7 @@ def cetak_daftar_hadir(request, bulan, tahun):
 @login_required(login_url = settings.LOGIN_KARYAWAN_URL)
 def dashboard(request):
 
-	daftar_hadir = Kehadiran_karyawan.objects.filter(karyawan__id = request.session['karyawan_id'])
+	daftar_hadir = Kehadiran_karyawan.objects.filter(waktu__year=tahun, waktu__month=bulan, karyawan__id=request.session['karyawan_id'])
 
 
-	return render(request, 'dashboard.html',{})
+	return render(request, 'dashboard.html',{'daftar_hadir':daftar_hadir})

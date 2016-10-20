@@ -11,7 +11,7 @@
 				{% csrf_token %}
 					<div class="form-group">
 						<label>Tahun</label>
-							<select id="tahun" name="tahun" class="form-control">
+							<select name="tahun" class="form-control">
 								<option value="2016">2016</option>
 								<option value="2015">2015</option>
 								<option value="2014">2014</option>
@@ -19,7 +19,7 @@
 					</div>
 					<div class="form-group">
 						<label>Bulan</label>
-							<select id="bulan" name="bulan" class="form-control">
+							<select name="bulan" class="form-control">
 								<option value="1">Januari</option>
 								<option value="2">Febuari</option>
 								<option value="3">Maret</option>
@@ -64,10 +64,10 @@
 						{% endif %}
 					</tbody>
 			</table>
-			{% if daftar_hadir %}
-				<p><a href="/daftar_hadir/grafik/{{bulan}}/{{tahun}}">lihat grafik</a></p>
-				<p><a href="/daftar_hadir/cetak/{{bulan}}/{{tahun}}">lihat pdf</a></p>
-			{% endif %}
+            {% if daftar_hadir %}
+                <a href="/daftar_hadir/grafik/{{ bulan }}/{{ tahun }}" class="btn btn-info"><i class="fa fa-bar-chart-o"></i> Tampilkan Grafik</a>
+              	<a href="/daftar_hadir/cetak/{{ bulan }}/{{ tahun }}" class="btn btn-primary"><i class="fa fa-file-pdf-o"></i> Cetak PDF</a>
+            {% endif %}
 		</div>
 		</div>
 	</div>

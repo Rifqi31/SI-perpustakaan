@@ -65,15 +65,6 @@ class Kehadiran_karyawan(models.Model):
 	jenis_kehadiran = models.CharField(max_length = 50, choices = JENIS_KEHADIRAN_CHOICE)
 	waktu = models.DateField()
 
-	@property
-	def tahun(self):
-		return self.waktu.tahun
-
-	@property
-	def bulan(self):
-		return self.waktu.bulan
-	
-
 	def __unicode__(self):
 		return self.karyawan.nama_karyawan
 
