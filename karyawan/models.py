@@ -24,7 +24,7 @@ class biodata_karyawan(models.Model):
 	alamat = models.TextField()
 	no_telepon = models.CharField(max_length=12)
 	email = models.EmailField() 
-	foto = models.ImageField(upload_to = "upload")
+	foto_karyawan = models.ImageField(upload_to = "upload")
 
 	def __unicode__(self):
 		return self.nama_karyawan

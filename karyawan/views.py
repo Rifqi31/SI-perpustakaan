@@ -58,6 +58,14 @@ def logout_karyawan_view(request):
 	return redirect('/login_karyawan/')
 
 
+@login_required(login_url=settings.LOGIN_KARYAWAN_URL)
+def ganti_foto_karyawan(request):
+	karyawan = biodata_karyawan.objects.get(id=request.session['karyawan_id'])
+	karyawan.foto_karyawan = request.FILES['files']
+	karyawan.save()
+
+	return redirect('/profil_karyawan/')
+
 
 @login_required(login_url = settings.LOGIN_KARYAWAN_URL)
 def daftar_hadir_karyawan(request):

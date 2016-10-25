@@ -50,7 +50,7 @@ urlpatterns = [
     url(r'^daftar_hadir/$', karyawan_views.daftar_hadir_karyawan),
     url(r'^daftar_izin/', karyawan_views.daftar_izin_karyawan),
     url(r'^pengajuan_izin/', karyawan_views.pengajuan_izin_karyawan),
-    url(r'^ganti_foto/',karyawan_views.ganti_foto),
+    url(r'^ganti_foto_karyawan/',karyawan_views.ganti_foto_karyawan),
     url(r'^daftar_hadir/grafik/(?P<bulan>\d+)/(?P<tahun>\d+)$',karyawan_views.tampil_grafik, name ='show_grafik'),
     url(r'^daftar_hadir/cetak/(?P<bulan>\d+)/(?P<tahun>\d+)$',karyawan_views.cetak_daftar_hadir, name ='show_pdf'),
 

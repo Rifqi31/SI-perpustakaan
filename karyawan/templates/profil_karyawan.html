@@ -52,7 +52,7 @@
 	<div class="card card-user" style="width:250px;">
 		<div class="content">
 				<div id="foto-karyawan">	
-					<img  src="/media/{{ karyawan.foto }}" style="width:200px; padding:20px;">
+					<img  src="/media/{{ karyawan.foto_karyawan }}" style="width:200px; padding:20px;">
 				</div>
 		</div>
 			<button id="ganti-foto-button" class="btn btn-primary btn-xm btn-block" data-toggle="modal" data-target="#gantiFotoModal"><i class="fa fa-photo"></i>Ganti</button>
@@ -63,7 +63,7 @@
 
 	<div class="modal fade" id="gantiFotoModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 		<div class="modal-dialog">
-			<form action="/ganti_foto/" method="POST" enctype="multipart/form-data">
+			<form action="/ganti_foto_karyawan/" method="POST" enctype="multipart/form-data">
 
 			{% csrf_token %}
 				<div class="modal-content">

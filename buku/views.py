@@ -8,6 +8,7 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 #models
 from buku.models import *
 from karyawan.models import data_transaksi_peminjaman
+from anggota.models import biodata
 
 # Create your views here.
 
@@ -108,8 +109,10 @@ def daftar_peminjam(request):
 	daftar_peminjam = None
 
 	if request.method == 'POST':
-		judul = request.POST['judul_buku']
 
+		daftar_peminjam = data_transaksi_peminjaman.objects.filter(judul_buku = request.POST['judul_buku'])
+
+	else:
 		daftar_peminjam = data_transaksi_peminjaman.objects.all()
 
 
