@@ -202,10 +202,5 @@ def cetak_daftar_hadir(request, bulan, tahun):
 
 
 #dashboard
-@login_required(login_url = settings.LOGIN_KARYAWAN_URL)
-def dashboard(request):
-
-	daftar_hadir = Kehadiran_karyawan.objects.filter(waktu__year=tahun, waktu__month=bulan, karyawan__id=request.session['karyawan_id'])
-
-
-	return render(request, 'dashboard.html',{'daftar_hadir':daftar_hadir})
+#@login_required(login_url = settings.LOGIN_KARYAWAN_URL)
+#def dashboard(request):

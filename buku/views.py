@@ -110,7 +110,7 @@ def daftar_peminjam(request):
 	if request.method == 'POST':
 		judul = request.POST['judul_buku']
 
-		daftar_peminjam = data_transaksi_peminjaman.objects.filter()
+		daftar_peminjam = data_transaksi_peminjaman.objects.all()
 
 
 		#pagination
@@ -121,7 +121,7 @@ def daftar_peminjam(request):
 		except PageNotAnInteger:
 			daftar_peminjam = paginator.page(1)
 		except EmptyPage:
-			daftar_buku = paginator.page(paginator.num_pages)
+			daftar_peminjam = paginator.page(paginator.num_pages)
 
 
 	return render(request, 'daftar_peminjam.html',{'daftar_peminjam':daftar_peminjam})

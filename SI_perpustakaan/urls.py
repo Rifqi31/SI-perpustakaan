@@ -56,13 +56,13 @@ urlpatterns = [
 
 
     #Dashboard-karyawan
-    url(r'^dashboard/',karyawan_views.dashboard),
+    #url(r'^dashboard/',karyawan_views.dashboard),
 
     #buku
 
     url(r'^tampil_tabel/', buku_views.tampil_tabel,),   
-    url(r'^daftar_buku/', buku_views.daftar_peminjam, name ='daftar_peminjam'),
-    url(r'^daftar_peminjam/', buku_views.daftar_buku, name ='daftar_buku'),
+    url(r'^daftar_buku/', buku_views.daftar_buku, name ='daftar_buku'),
+    url(r'^daftar_peminjam/', buku_views.daftar_peminjam, name ='daftar_peminjam'),
     url(r'^daftar_suplier/', buku_views.daftar_suplier_buku, name ='suplier'),
     url(r'^daftar_penyumbang/', buku_views.daftar_penyumbang_buku, name ='penyumbang'),
 
