@@ -56,7 +56,7 @@ urlpatterns = [
 
 
     #Dashboard-karyawan
-    #url(r'^dashboard/',karyawan_views.dashboard),
+    url(r'^dashboard/',karyawan_views.dashboard),
 
     #buku
 

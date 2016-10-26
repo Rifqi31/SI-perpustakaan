@@ -23,6 +23,8 @@ from reportlab.lib import colors
 from karyawan.models import biodata_karyawan, Kehadiran_karyawan, Izin_karyawan, Akun_karyawan
 from karyawan.forms import *
 
+from anggota.models import biodata
+
 import json, time
 
 # Create your views here.
@@ -210,5 +212,22 @@ def cetak_daftar_hadir(request, bulan, tahun):
 
 
 #dashboard
-#@login_required(login_url = settings.LOGIN_KARYAWAN_URL)
-#def dashboard(request):
+@login_required(login_url = settings.LOGIN_KARYAWAN_URL)
+def dashboard(request):
+
+	#data anggota
+
+	data_anggota = biodata.objects.all()
+
+	#pagination
+	paginator = Paginator(data_anggota, 5)
+	page = request.GET.get('page')
+	try:
+		data_anggota = paginator.page(page)
+	except PageNotAnInteger:
+		data_anggota = paginator.page(1)
+	except EmptyPage:
+		data_anggota= paginator.page(paginator.num_pages)
+
+
+	return render(request,'dashboard.html',{'data_anggota':data_anggota})

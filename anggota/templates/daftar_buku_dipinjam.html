@@ -58,7 +58,7 @@
 					</li>
 				{% if daftar_buku_dipinjam.has_next %}
 					<li class="next">
-						<a href="?page={{daftar_buku_dipinjam.page_number}}">next</a>
+						<a href="?page={{daftar_buku_dipinjam.next_page_number}}">next</a>
 					</li>
 				{% endif %}
 			</ul>
@@ -108,7 +108,7 @@
 					</li>
 				{% if history_buku_pinjam.has_next %}
 					<li class="next">
-						<a href="?page={{history_buku_pinjam.page_number}}">next</a>
+						<a href="?page={{history_buku_pinjam.next_page_number}}">next</a>
 					</li>
 				{% endif %}
 			</ul>

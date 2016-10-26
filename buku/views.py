@@ -8,7 +8,6 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 #models
 from buku.models import *
 from karyawan.models import data_transaksi_peminjaman
-from anggota.models import biodata
 
 # Create your views here.
 
