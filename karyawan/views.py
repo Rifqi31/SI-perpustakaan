@@ -20,7 +20,7 @@ from reportlab.lib.pagesizes import A4, landscape
 from reportlab.lib import colors
 
 #models and forms
-from karyawan.models import biodata_karyawan, Kehadiran_karyawan, Izin_karyawan, Akun_karyawan
+from karyawan.models import biodata_karyawan, Kehadiran_karyawan, Izin_karyawan, Akun_karyawan, data_transaksi_peminjaman
 from karyawan.forms import *
 
 from anggota.models import biodata

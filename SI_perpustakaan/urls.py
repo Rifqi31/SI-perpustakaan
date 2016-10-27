@@ -21,7 +21,6 @@ from django.conf.urls.static import static
 
 #app as view
 
-from welcome_page import views as welcome_views
 from anggota import views as anggota_views
 from karyawan import views as karyawan_views
 from buku import views as buku_views
@@ -33,8 +32,8 @@ urlpatterns = [
     #anggota
 
     url(r'^$', anggota_views.profil),
-    url(r'^login/', welcome_views.login_view),
-    url(r'^logout/', welcome_views.logout_view),
+    url(r'^login/', anggota_views.login_view),
+    url(r'^logout/', anggota_views.logout_view),
     url(r'^register_bio/', anggota_views.register_bio_view),
     url(r'^register_user/', anggota_views.register_user_view),
     url(r'^ganti_foto/',anggota_views.ganti_foto),

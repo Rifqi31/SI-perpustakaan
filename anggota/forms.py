@@ -71,11 +71,3 @@ class peminjaman_form(ModelForm):
 				'required':'anda harus mengisi judul buku'
 			},
 		}
-
-
-
-
-#class akun_anggota_form(ModelForm):
-#	class Meta:
-#		model = Akun_perpus
-#		fields = ['akun','anggota']

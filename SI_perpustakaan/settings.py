@@ -46,7 +46,6 @@ INSTALLED_APPS = [
     'anggota',
     'buku',
     'karyawan',
-    'welcome_page',
 ]
 
 MIDDLEWARE_CLASSES = [

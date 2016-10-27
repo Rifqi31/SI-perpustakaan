@@ -55,3 +55,19 @@ class Akun_perpus(models.Model):
 
 	def __unicode__(self):
 		return self.anggota.nama
+
+
+class kehadiran_anggota(models.Model):
+
+	JENIS_ABSEN_CHOICE = {
+
+		('masuk','Masuk'),
+		('keluar','Keluar')
+	}
+
+	anggota = models.ForeignKey(biodata)
+	jenis_absen = models.CharField(max_length = 6, choices = JENIS_ABSEN_CHOICE)
+	waktu = models.DateTimeField()
+
+	def __unicode__(self):
+		return anggota.nama

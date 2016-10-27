@@ -8,12 +8,45 @@ from django.contrib.auth.models import User
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 from buku.models import *
-from anggota.models import biodata, transaksi_peminjaman
+
+from anggota.models import biodata, transaksi_peminjaman,Akun_perpus
 from anggota.forms import anggota_form, akun_form, peminjaman_form
+
 from karyawan.models import data_transaksi_peminjaman
-#from anggota.models import akun_anggota_form
 
 # Create your views here.
+
+def login_view(request):
+	if request.POST:
+		user = authenticate(username=request.POST['username'],password=request.POST['password'])
+
+		if user is not None:
+			if user.is_active:
+				try:
+					akun = Akun_perpus.objects.get(akun=user.id)
+					login(request, user)
+
+					request.session['anggota_id'] = akun.anggota.id
+					request.session['username'] = request.POST['username']
+
+				except:
+					messages.add_message(request, messages.INFO, 'Akun ini belum terhubung dengan data anggota, silahkan hubungi administartor')
+				return redirect('/')
+
+			else:
+				messages.add_message(request, messages.INFO, 'User belum terverifikasi')
+
+		else:
+			messages.add_message(request, messages.INFO, 'Username atau password Anda salah')
+
+	return render(request, 'login.html')
+
+
+
+def logout_view(request):
+	logout(request)
+	return redirect('/login/')
+
 
 @login_required(login_url=settings.LOGIN_URL)
 def profil(request):
