@@ -66,5 +66,9 @@ urlpatterns = [
     url(r'^daftar_penyumbang/', buku_views.daftar_penyumbang_buku, name ='penyumbang'),
 
 
+    #daftar anggota
+    url(r'^daftar_anggota/', karyawan_views.daftar_anggota),
+
+
     
 ] + static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)

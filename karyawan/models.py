@@ -4,6 +4,8 @@ from django.conf import settings
 from django.db import models
 from django.contrib.auth.models import User
 
+from django.utils import timezone
+
 from anggota.models import biodata
 from buku.models import data_buku
 
@@ -64,6 +66,10 @@ class Kehadiran_karyawan(models.Model):
 	karyawan = models.ForeignKey(biodata_karyawan)
 	jenis_kehadiran = models.CharField(max_length = 50, choices = JENIS_KEHADIRAN_CHOICE)
 	waktu = models.DateField()
+
+	def absen(self):
+		self.waktu = timezone.now()
+		self.save()
 
 	def __unicode__(self):
 		return self.karyawan.nama_karyawan

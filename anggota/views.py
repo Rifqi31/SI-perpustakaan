@@ -3,6 +3,8 @@ from django.contrib.auth.decorators import login_required
 from django.conf import settings
 
 from django.contrib.auth.models import User
+from django.contrib.auth import authenticate, logout, login
+from django.contrib import messages
 
 #Paginator
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger

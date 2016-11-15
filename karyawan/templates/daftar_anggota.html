@@ -1,0 +1,65 @@
+{% extends 'base-karyawan.html' %}
+
+{% load dashboard_helper %}
+
+{% block content %}
+
+<div class="col-md-12">
+	<div class="card">
+     	<div class="header">
+             <h4 class="title">Daftar Anggota</h4>                   
+        </div>
+        <div class="content table-responsive table-full-width">
+		<div class="table-responsive">
+            <table class="table table-hover">
+				<thead>
+					<tr>
+						<th>#</th>
+						<td>Nama</td>
+						<td>Jenis Kelamin</td>
+						<td>Tgl Lahir</td>
+						<td>Alamat</td>
+						<td>Status</td>
+					</tr>
+				</thead>
+					<tbody>
+						{% if data_anggota %}
+							{% for daftar_anggota in data_anggota %}
+								<tr>
+									<td>{{ forloop.counter }}</td>
+									<td>{{ daftar_anggota.nama }}</td>
+									<td>{{ daftar_anggota.jenis_kelamin }}</td>
+									<td>{{ daftar_anggota.tgl_lahir }}</td>
+									<td>{{ daftar_anggota.alamat }}</td>
+									<td>{{ daftar_anggota.status }}</td>
+								</tr>
+							{% endfor %}
+						{% else %}
+								<tr>
+									<td colspan="3" style="text-align:center;">Tidak ada data buku ..</td>
+								</tr>
+						{% endif %}
+					</tbody>
+			</table>
+		</div>
+			<ul class="pager">
+				{% if data_anggota.has_previous %}
+					<li class="previous">
+						<a href="?page={{data_anggota.previous_page_number}}">previous</a>
+					</li>
+				{% endif %}
+					<li class="current">
+						Page{{ data_anggota.number }} of {{ data_anggota.paginator.num_pages }}.
+					</li>
+				{% if data_anggota.has_next %}
+					<li class="next">
+						<a href="?page={{data_anggota.next_page_number}}">next</a>
+					</li>
+				{% endif %}
+			</ul>
+		</div>
+	</div>
+</div>
+
+
+{% endblock %}

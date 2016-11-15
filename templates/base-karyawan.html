@@ -41,7 +41,12 @@
                         <p>Buku</p>
                     </a>
                 </li>          
-                
+                <li>
+                    <a href="/daftar_anggota/">
+                        <i class="pe-7s-users"></i>
+                        <p>Daftar Anggota</p>
+                    </a>
+                </li>
                 <li>
                     <a href="/daftar_hadir/">
                         <i class="pe-7s-timer"></i>
@@ -79,7 +84,7 @@
                     <ul class="nav navbar-nav navbar-right">
                         {% if request.user.is_authenticated %}
                             <li><a href="">{{ request.session.username }}</a></li>
-                            <li><a href="/logout/">Logout</a></li>
+                            <li><a href="/logout_karyawan/">Logout</a></li>
                         {% endif %}
                     </ul>
                 </div>

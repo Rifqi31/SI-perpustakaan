@@ -22,8 +22,10 @@ from reportlab.lib import colors
 #models and forms
 from karyawan.models import biodata_karyawan, Kehadiran_karyawan, Izin_karyawan, Akun_karyawan, data_transaksi_peminjaman
 from karyawan.forms import *
-
 from anggota.models import biodata
+
+
+from django.utils import timezone
 
 import json, time
 
@@ -37,6 +39,7 @@ def login_karyawan_view(request):
 			if user.is_active:
 				try:
 					akun = Akun_karyawan.objects.get(akun=user.id)
+
 					login(request, user)
 
 					request.session['karyawan_id'] = akun.karyawan.id
@@ -58,6 +61,15 @@ def login_karyawan_view(request):
 def logout_karyawan_view(request):
 	logout(request)
 	return redirect('/login_karyawan/')
+
+
+
+@login_required(login_url=settings.LOGIN_KARYAWAN_URL)
+def absen_karyawan(request):
+	karyawan = Kehadiran_karyawan.objects.get(id = request.session['karyawan_id']),
+	jenis_kehadiran = Kehadiran_karyawan.objects.get(jenis_kehadiran = 'hadir'),
+	waktu = timezone.now()
+
 
 
 @login_required(login_url=settings.LOGIN_KARYAWAN_URL)
@@ -211,10 +223,10 @@ def cetak_daftar_hadir(request, bulan, tahun):
 	return response
 
 
-#dashboard
-@login_required(login_url = settings.LOGIN_KARYAWAN_URL)
-def dashboard(request):
 
+#daftar anggota
+@login_required(login_url = settings.LOGIN_KARYAWAN_URL)
+def daftar_anggota(request):
 	#data anggota
 
 	data_anggota = biodata.objects.all()
@@ -230,4 +242,27 @@ def dashboard(request):
 		data_anggota= paginator.page(paginator.num_pages)
 
 
-	return render(request,'dashboard.html',{'data_anggota':data_anggota})
+	return render(request, 'daftar_anggota.html',{'data_anggota':data_anggota})
+
+
+#dashboard
+@login_required(login_url = settings.LOGIN_KARYAWAN_URL)
+def dashboard(request):
+
+
+	#data grafik anggota
+
+	temp_chart_data = []
+
+	grafik_jenis_anggota = biodata.objects.all()
+
+	temp_chart_data.append({"x":"bekerja","a":grafik_jenis_anggota.filter(status='bekerja').count() })
+	temp_chart_data.append({"x":"pelajar","a":grafik_jenis_anggota.filter(status='pelajar').count() })
+	temp_chart_data.append({"x":"mahasiswa","a":grafik_jenis_anggota.filter(status='mahasiswa').count() })
+	temp_chart_data.append({"x":"umum","a":grafik_jenis_anggota.filter(status='umum').count() })
+
+	chart_data = json.dumps({"data":temp_chart_data})
+
+
+
+	return render(request,'dashboard.html',{'chart_data':chart_data})
